@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        Button callSettings = (Button)findViewById(R.id.button_settings);
+        Button callSettings = findViewById(R.id.button_settings);
         callSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button callAddPerson = (Button)findViewById(R.id.button_addPerson);
+        Button callAddPerson = findViewById(R.id.button_addPerson);
         callAddPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 
         FileHelper fh = new FileHelper();
 
-        Button callDetectionTest = (Button)findViewById(R.id.button_detection_test);
+        Button callDetectionTest = findViewById(R.id.button_detection_test);
         if(fh.getDetectionTestList().length == 0) callDetectionTest.setEnabled(false);
         callDetectionTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button callDetectionView = (Button)findViewById(R.id.button_detection_view);
+        Button callDetectionView = findViewById(R.id.button_detection_view);
         callDetectionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +88,8 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button callRecognition = (Button)findViewById(R.id.button_recognition_view);
-        if(!((new File(fh.DATA_PATH)).exists())) callRecognition.setEnabled(false);
+        Button callRecognition = findViewById(R.id.button_recognition_view);
+        if(!((new File(FileHelper.DATA_PATH)).exists())) callRecognition.setEnabled(false);
         callRecognition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,8 +98,10 @@ public class MainActivity extends Activity {
         });
 
 
-        Button callTraining = (Button)findViewById(R.id.button_recognition_training);
-        if(fh.getTrainingList().length == 0) callTraining.setEnabled(false);
+        Button callTraining = findViewById(R.id.button_recognition_training);
+
+        File[] trainingList = fh.getTrainingList();
+        if(trainingList == null || trainingList.length == 0) callTraining.setEnabled(false);
         callTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,8 +109,9 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button callTest = (Button)findViewById(R.id.button_recognition_test);
-        if(fh.getTestList().length == 0 || !((new File(fh.DATA_PATH)).exists())) callTest.setEnabled(false);
+        Button callTest = findViewById(R.id.button_recognition_test);
+        File[] testList = fh.getTestList();
+        if(testList == null || testList.length == 0 || !((new File(FileHelper.DATA_PATH)).exists())) callTest.setEnabled(false);
         callTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +119,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button callAbout = (Button)findViewById(R.id.button_about);
+        Button callAbout = findViewById(R.id.button_about);
         callAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
